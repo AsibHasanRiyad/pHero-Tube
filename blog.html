@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+        <!-- tailwind and daisyUI -->
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- google font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            body{
+                font-family: 'Inter', sans-serif;
+            }
+        </style>
+</head>
+<body class="m-8">
+    <div class="join join-vertical w-full">
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="my-accordion-4" checked="checked" /> 
+          <div class="collapse-title text-2xl font-medium">
+            Discuss the scope of var, let, and const
+          </div>
+          <div class="collapse-content"> 
+                <h1 class="text-4xl font-extralight mb-3">The scope of var, let, and const are discussed below-</h1>
+                <ul class="ml-8 list-disc">
+                    <li> var declarations are globally scoped or function scoped while let and const are block scoped.</li>
+                    <li> var variables can be updated and re-declared within its scope; let variables can be updated but not re-declared; const variables can neither be updated nor re-declared.</li>
+                    <li> They are all hoisted to the top of their scope. But while var variables are initialized with undefined, let and const variables are not initialized.</li>
+                    <li> While var and let can be declared without being initialized, const must be initialized during declaration. 
+                    </li>
+                </ul>
+                <div class="w-[50vw] mx-auto mt-5" >
+                    <img src="images/varLet.jpeg" alt="">
+                </div>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="my-accordion-4" /> 
+          <div class="collapse-title text-2xl font-medium">
+            Tell us the use cases of null and undefined
+          </div>
+          <div class="collapse-content"> 
+            <p>
+                <ul class="list-disc ml-8">
+                    <li>Null is basically an assignment value. The variable which has been assigned as null contains no value and is empty.</li>
+                    <li>Undefined is when we declare a variable but do not assign a value to it(define it), the variable becomes undefined.
+                        Null is a type of object.</li>
+                    <li>The data type of undefined is undefined.</li>
+                    <li>When we perform arithmetic operations on null, the value gets converted to 0, and then the further operations get performed. When we perform arithmetic operations on undefined, it prints NaN as the value is undefined and not a number. </li>
+                </ul>
+            </p>
+            <div class="w-[50vw] mx-auto mt-5" >
+                <img src="images/undefined.jpeg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="my-accordion-4" /> 
+          <div class="collapse-title text-2xl font-medium">
+            What do you mean by REST API?
+          </div>
+          <div class="collapse-content"> 
+            <p>
+                <h1 class="text-4xl font-extralight mb-3">
+                    What is a REST API?
+                </h1>
+                An API, or application programming interface, is a set of rules that define how applications or devices can connect to and communicate with each other. A REST API is an API that conforms to the design principles of the REST, or representational state transfer architectural style. For this reason, REST APIs are sometimes referred to RESTful APIs.
+                First defined in 2000 by computer scientist Dr. Roy Fielding in his doctoral dissertation, REST provides a relatively high level of flexibility and freedom for developers. This flexibility is just one reason why REST APIs have emerged as a common method for connecting components and applications in a microservices architecture.
+            </p>
+            <div class="w-[50vw] mx-auto mt-5" >
+                <img src="images/restAPI.webp" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- script -->
+      <script src="blog.js"></script>
+</body>
+</html>

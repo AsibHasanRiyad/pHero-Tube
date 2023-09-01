@@ -25,10 +25,43 @@ const handelCard = async(id) =>{
     emptyContainer.textContent = ''
     if (card.length > 0) {
         card.forEach(newCard => {
+            const date = newCard.others.posted_date;
+            dateValue = parseFloat(date)
+
+
+
+            if (isNaN(dateValue)) {
+                dateValue =''
+            }
+            else{
+                dateValue = dateValue
+            }
+
+            const convertToHoursMin = (dateValue) =>{
+                const hours = Math.floor(dateValue / 3600) ;
+                const min = Math.floor((dateValue % 3600) / 60 )
+                const time = `${hours}hrs ${min}min ago`
+                if (hours > 0 && min > 0) {
+                    return {time}
+                }
+                else{
+                    return '';
+                }
+                // return {time}
+            }
+
+            const resultDate = convertToHoursMin(dateValue);
+
+        //    console.log(resultDate.time);
+
+
             const cardContent = document.createElement('div');
             cardContent.innerHTML =`
             <div class="card">
-            <figure class="rounded-xl max-h-[180px] "><img src="${newCard?.thumbnail}" alt="Image" /></figure>
+            <div class="relative">
+            <figure class="rounded-xl h-[180px] w-full"><img src="${newCard?.thumbnail}" alt="Image" /></figure>
+            </div>
+            <h1 class="absolute right-2 top-[140px] bg-gray-800 px-2 rounded text-white"> ${resultDate?.time?resultDate?.time :''}</h1
             <div class="mt-5">
               <div class="flex flex-row items-start gap-2">
                   <div class="avatar">
