@@ -1,30 +1,59 @@
+
 const handelCategories = async() =>{
     const res = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const data = await res.json();
     const category = data.data;
     const categoryContainer = document.getElementById('category-container');
     category.forEach(category => {
+        global = category.category_id
         const categoryContent = document.createElement('div');
         categoryContent.classList ='mr-4 mb-4'
         categoryContent.innerHTML=`
-        <button onclick="handelCard('${category.category_id}')" )" class="tab hover:bg-red-500 bg-gray-200 hover:text-white">${category.category}</button> 
+        <button onclick="fetchHandler(${category.category_id})" class="tab hover:bg-red-500 bg-gray-200 hover:text-white">${category.category}</button> 
         `
         categoryContainer.appendChild(categoryContent)
-    });
-    // console.log(category);
-}
 
-const handelCard = async(id) =>{
+
+        
+    });
+}
+let sortVideos = null;
+const fetchHandler = async(id=1000) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     const data = await res.json();
-    const card = data.data
-    // console.log(card.length);
+    const card = data.data;
+    sortVideos = card;
+    handelCard(card)
+}
+const sortHandler = () =>{
+    sortVideos.sort(
+        (a,b) =>
+         (parseFloat(b.others.views.split('K')[0] ) - parseFloat(a.others.views.split('K')[0] ) )
+
+        )
+        handelCard(sortVideos)
+        
+}
+fetchHandler()
+
+
+
+
+
+
+const handelCard = (cards) =>{
+    // const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
+    // const data = await res.json();
+    // const card = data.data;
+    // card.sort((a,b) =>{
+    //     return (parseFloat(b.others.views) - parseFloat(a.others.views) )
+    // })
     const cardContainer = document.getElementById('card-container');
     const emptyContainer = document.getElementById('empty-container');
     cardContainer.textContent = ''
     emptyContainer.textContent = ''
-    if (card.length > 0) {
-        card.forEach(newCard => {
+    if (cards.length > 0) {
+        cards.forEach(newCard => {
             const date = newCard.others.posted_date;
             dateValue = parseFloat(date)
 
@@ -59,18 +88,18 @@ const handelCard = async(id) =>{
             cardContent.innerHTML =`
             <div class="card">
             <div class="relative">
-            <figure class="rounded-xl h-[180px] w-full"><img src="${newCard?.thumbnail}" alt="Image" /></figure>
+            <figure class=""><img class ="h-[212px] w-full rounded-xl" src="${newCard?.thumbnail}" alt="Image" /></figure>
             </div>
-            <h1 class="absolute right-2 top-[140px] bg-gray-800 px-2 rounded text-white"> ${resultDate?.time?resultDate?.time :''}</h1
+            <h1 class="absolute right-6 bottom-[120px] bg-gray-800 px-2 rounded text-white"> ${resultDate?.time?resultDate?.time :''}</h1
             <div class="mt-5">
               <div class="flex flex-row items-start gap-2">
                   <div class="avatar">
-                    <div class="w-10 rounded-full">
+                    <div class="w-10 rounded-full mt-2">
                       <img src="${newCard?.authors[0]?.profile_picture}" />
                     </div>
                   </div>
                   <div>
-                    <h1 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, laudantium.</h1>
+                    <h1 class="card-title mt-2">${newCard?.title}</h1>
                     <div class="card-actions justify-start mt-4">
                         <div class="text-[#111111B3] ">${newCard?.authors[0]?.profile_name} </div> 
                         <div class="">
@@ -117,44 +146,9 @@ const handelCard = async(id) =>{
 
 
 
-
-
-
-
 handelCategories()
 
 
 
-// sort by data
-const catagories = async() =>{
-    const res = await fetch('https://openapi.programming-hero.com/api/videos/categories');
-    const data = await res.json();
-    const category = data.data;
-    category.forEach(category => {
-        sortByView(category.category_id)
-    });
-    
-}
-const sortByView = async (id) =>{
-    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
-    const data = await res.json();
-    const card = data.data;
-    // console.log(card);
-    const views = []
-    card.forEach(view=> {
-        // console.log(view.others.views);
-        const eachView = view.others.views;
-        const eachViewValue = parseFloat(eachView)
-        views.push(eachViewValue);
-        views.sort((a,b) =>{
-            return (b-a);
-        })
-        // console.log(view);
-
-    });
-    console.log(views);
-}
 
 
-
-// catagories()
